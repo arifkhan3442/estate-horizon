@@ -31,9 +31,9 @@ export const register = async (req, res) => {
       method: "POST",
     });
     
-    if (!data.success) {
-      return res.status(400).json({ message: "Captcha not Verified!" });
-    }
+    // if (!data.success) {
+    //   return res.status(400).json({ message: "Captcha not Verified!" });
+    // }
 
     const otp = crypto.randomInt(100000, 999999); // Generate a 6-digit OTP
     otpStore[email] = otp;
@@ -69,9 +69,9 @@ export const login = async (req, res) => {
       url: `https://www.google.com/recaptcha/api/siteverify?secret=${SEC_KEY}&response=${recaptchaValue}`,
       method: "POST",
     });
-    if (!data.success) {
-      return res.status(400).json({ message: "Captcha not Verified!" });
-    }
+    // if (!data.success) {
+    //   return res.status(400).json({ message: "Captcha not Verified!" });
+    // }
 
     // CHECK IF THE USER EXISTS
     const user = await prisma.user.findUnique({
